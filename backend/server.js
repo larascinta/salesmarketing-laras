@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const db = require('./db');
+const path = require('path');
 
 const app = express();
 const PORT = 3000;
@@ -8,6 +9,9 @@ const PORT = 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve Static Frontend Files
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // ==========================================
 // 1. Auth (Login)
