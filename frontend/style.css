@@ -348,3 +348,13 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+  
+/* Company Profile */  
+.profile-header { text-align: center; padding: 3rem 2rem; margin-bottom: 2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; }  
+.profile-brand h1 { font-size: 2.5rem; margin: 1rem 0 0.5rem; }  
+.brand-icon { font-size: 4rem; text-shadow: 0 4px 10px rgba(0,0,0,0.2); }  
+.profile-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }  
+.profile-card { padding: 2rem; }  
+.profile-card h3 { color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; }  
+.profile-card ul { padding-left: 1.5rem; line-height: 1.6; }  
+.contact-list { list-style: none; padding-left: 0 !important; }  
