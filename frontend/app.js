@@ -1,4 +1,4 @@
-const API_URL = '/api';
+const API_URL = 'https://shaky-cobras-jog.loca.lt/api';
 
 // Global State
 let currentUser = null; // Admin/Sales
