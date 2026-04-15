@@ -4,7 +4,8 @@ const db = require('./db');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 
 // Middleware
 app.use(cors());
@@ -27,6 +28,40 @@ app.post('/api/login', async (req, res) => {
         }
     } catch (err) {
         res.status(500).json({ error: err.message });
+    }
+});
+
+// Customer Login
+app.post('/api/customer-login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const [customers] = await db.execute('SELECT id, username, name, email FROM customers WHERE username = ? AND password = ?', [username, password]);
+        if (customers.length > 0) {
+            res.json({ success: true, customer: customers[0] });
+        } else {
+            res.status(401).json({ success: false, message: 'Username atau password salah' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Customer Register
+app.post('/api/customer-register', async (req, res) => {
+    try {
+        const { username, password, name, email, phone } = req.body;
+        const [result] = await db.execute(
+            'INSERT INTO customers (username, password, name, email, phone, status) VALUES (?, ?, ?, ?, ?, ?)',
+            [username, password, name, email, phone, 'active']
+        );
+        res.json({ success: true, id: result.insertId });
+    } catch (err) {
+        // Simple error handling for duplicate usernames
+        if (err.code === 'ER_DUP_ENTRY') {
+            res.status(400).json({ success: false, message: 'Username sudah digunakan' });
+        } else {
+            res.status(500).json({ error: err.message });
+        }
     }
 });
 
@@ -90,9 +125,10 @@ app.post('/api/transactions', async (req, res) => {
         const { user_id, customer_id, total_amount, payment_method, items } = req.body;
 
         // Create transaction
+        const dbUserId = user_id || null;
         const [txResult] = await connection.execute(
             'INSERT INTO transactions (user_id, customer_id, total_amount, payment_method) VALUES (?, ?, ?, ?)',
-            [user_id, customer_id, total_amount, payment_method]
+            [dbUserId, customer_id, total_amount, payment_method]
         );
         const transactionId = txResult.insertId;
 

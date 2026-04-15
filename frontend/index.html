@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales Marketing Pro</title>
+    <title>Electro Ayas | Premium Electronics</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,36 +12,80 @@
 </head>
 <body>
     
-    <!-- Login Screen -->
-    <div id="login-view" class="view active">
+    <!-- Public Landing Page -->
+    <div id="landing-view" class="view active">
+        <nav class="public-navbar glassmorphism">
+            <div class="nav-brand"><i class="fa-solid fa-microchip"></i> Electro Ayas</div>
+            <ul class="public-nav-links">
+                <li><a href="#hero-section">Beranda</a></li>
+                <li><a href="#public-products">Produk</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div id="user-actions" style="display: none; align-items: center; gap: 10px;">
+                    <span id="customer-name-display" style="font-weight: 600;"></span>
+                    <button id="btn-public-cart" class="btn-primary hover-anim"><i class="fa-solid fa-cart-shopping"></i> Keranjang (<span id="cart-count">0</span>)</button>
+                    <button id="btn-customer-logout" class="btn-outline hover-anim"><i class="fa-solid fa-right-from-bracket"></i></button>
+                </div>
+                <div id="guest-actions">
+                    <button id="btn-show-customer-login" class="btn-primary hover-anim">Login / Daftar</button>
+                </div>
+                <button id="btn-show-admin-login" class="btn-outline hover-anim" style="margin-left: 10px;" title="Admin Portal"><i class="fa-solid fa-user-shield"></i></button>
+            </div>
+        </nav>
+
+        <section id="hero-section" class="public-hero">
+            <div class="hero-content">
+                <h1>Teknologi Terdepan di Tangan Anda</h1>
+                <p>Temukan perangkat elektronik premium bergaransi resmi untuk kebutuhan personal maupun corporate.</p>
+                <a href="#public-products" class="btn-primary hover-anim hero-btn">Mulai Belanja</a>
+            </div>
+        </section>
+
+        <section id="public-products" class="public-section">
+            <h2 class="section-title">Katalog Kami</h2>
+            <div class="public-product-grid" id="public-product-list">
+                <!-- Products injected by JS -->
+            </div>
+        </section>
+        
+        <footer class="public-footer glassmorphism text-center">
+            <p>&copy; 2026 Electro Ayas. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Admin Login Screen -->
+    <div id="admin-login-view" class="view" style="display: none;">
         <div class="login-container glassmorphism">
             <div class="login-header">
-                <i class="fa-solid fa-chart-line logo-icon"></i>
-                <h2>Welcome Back</h2>
+                <i class="fa-solid fa-user-shield logo-icon"></i>
+                <h2>Admin Portal</h2>
                 <p>Sales Marketing Pro System</p>
             </div>
-            <form id="login-form">
+            <form id="admin-login-form">
                 <div class="input-group">
-                    <label for="username">Username</label>
+                    <label for="admin-username">Username</label>
                     <div class="input-icon">
                         <i class="fa-regular fa-user"></i>
-                        <input type="text" id="username" placeholder="Demo: admin_sales" required>
+                        <input type="text" id="admin-username" placeholder="Demo: admin_ayas" required>
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="password">Password</label>
+                    <label for="admin-password">Password</label>
                     <div class="input-icon">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="password" placeholder="Demo: 123456" required>
+                        <input type="password" id="admin-password" placeholder="Demo: 123456" required>
                     </div>
                 </div>
-                <button type="submit" class="btn-primary w-100 mt-2 hover-anim">Log In</button>
-                <div id="login-error" class="error-msg"></div>
+                <div style="display:flex; gap:10px; margin-top: 15px;">
+                    <button type="button" id="btn-back-home" class="btn-outline w-100 hover-anim">Batal</button>
+                    <button type="submit" class="btn-primary w-100 hover-anim">Log In</button>
+                </div>
+                <div id="admin-login-error" class="error-msg"></div>
             </form>
         </div>
     </div>
 
-    <!-- Main Application -->
+    <!-- Main Application (Admin Dashboard) -->
     <div id="app-view" class="view" style="display: none;">
         <nav class="sidebar glassmorphism">
             <div class="sidebar-brand">
@@ -49,7 +93,6 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#" data-target="dashboard" class="nav-item active"><i class="fa-solid fa-chart-pie"></i> Laporan Dashboard</a></li>
-                <li><a href="#" data-target="company-profile" class="nav-item"><i class="fa-solid fa-building"></i> Profil Perusahaan</a></li>
                 <li><a href="#" data-target="transactions" class="nav-item"><i class="fa-solid fa-cart-shopping"></i> Transaksi POS</a></li>
                 <li><a href="#" data-target="products" class="nav-item"><i class="fa-solid fa-box"></i> Data Produk</a></li>
                 <li><a href="#" data-target="customers" class="nav-item"><i class="fa-solid fa-users"></i> Data Customer</a></li>
@@ -76,7 +119,7 @@
                         <div class="stat-card glassmorphism hover-anim">
                             <div class="stat-icon b-blue"><i class="fa-solid fa-money-bill-wave"></i></div>
                             <div class="stat-info">
-                                <h3>Total Penjualan BUB</h3>
+                                <h3>Total Penjualan Bulan Ini</h3>
                                 <p id="total-sales">Rp 0</p>
                             </div>
                         </div>
@@ -100,39 +143,6 @@
                             </thead>
                             <tbody id="top-products-tbody"></tbody>
                         </table>
-                    </div>
-                </section>
-
-                <!-- Company Profile View -->
-                <section id="company-profile" class="page-section" style="display: none;">
-                    <div class="profile-header glassmorphism">
-                        <div class="profile-brand">
-                            <i class="fa-solid fa-microchip brand-icon"></i>
-                            <h1>Electro Ayas</h1>
-                            <p>Premium B2B & Retail Electronics Provider</p>
-                        </div>
-                    </div>
-                    <div class="profile-content mt-4">
-                        <div class="profile-card glassmorphism hover-anim">
-                            <h3><i class="fa-solid fa-bullseye"></i> Visi Kami</h3>
-                            <p>Menjadi pelopor penyedia solusi teknologi terdepan di Indonesia dengan menghadirkan perangkat elektronik berkualitas tinggi, bergaransi resmi, dan pelayanan prima kepada pelanggan corporate maupun individu.</p>
-                        </div>
-                        <div class="profile-card glassmorphism hover-anim">
-                            <h3><i class="fa-solid fa-rocket"></i> Misi Kami</h3>
-                            <ul>
-                                <li>Menyediakan jajaran produk elektronik terbaru dan teruji dari berbagai merek global.</li>
-                                <li>Memberikan kenyamanan dan kemudahan transaksi digital yang aman.</li>
-                                <li>Menawarkan solusi B2B (Business to Business) untuk pengadaan massal yang efisien.</li>
-                            </ul>
-                        </div>
-                        <div class="profile-card glassmorphism hover-anim">
-                            <h3><i class="fa-solid fa-address-book"></i> Kontak & Bantuan</h3>
-                            <ul class="contact-list">
-                                <li><i class="fa-solid fa-location-dot"></i> Jl. Teknologi Canggih No. 99, Mega Kuningan, Jakarta Selatan</li>
-                                <li><i class="fa-solid fa-phone"></i> (021) 555-88899</li>
-                                <li><i class="fa-regular fa-envelope"></i> hello@electroayas.co.id</li>
-                            </ul>
-                        </div>
                     </div>
                 </section>
 
@@ -207,6 +217,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Username</th>
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>No. HP</th>
@@ -222,15 +233,72 @@
         </main>
     </div>
 
-    <!-- Modal Form -->
+    <!-- Modal Form (Admin Data Entry) -->
     <div id="data-modal" class="modal">
         <div class="modal-content glassmorphism">
-            <span class="close">&times;</span>
+            <span class="close" data-modal="data-modal">&times;</span>
             <h3 id="modal-title">Form Title</h3>
             <form id="data-form" class="mt-3">
                 <div id="form-fields"></div>
                 <button type="submit" class="btn-primary w-100 mt-3 hover-anim">Simpan Data</button>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal Form (Customer Auth) -->
+    <div id="customer-auth-modal" class="modal">
+        <div class="modal-content glassmorphism" style="max-width: 350px;">
+            <span class="close" data-modal="customer-auth-modal">&times;</span>
+            
+            <div id="customer-login-box">
+                <h3>Login Customer</h3>
+                <form id="customer-login-form" class="mt-3">
+                    <div class="form-group mb-2"><label>Username</label><input type="text" id="cust-login-username" class="form-control" placeholder="Demo: budi_cust" required></div>
+                    <div class="form-group mb-2"><label>Password</label><input type="password" id="cust-login-password" class="form-control" placeholder="Demo: 123456" required></div>
+                    <button type="submit" class="btn-primary w-100 mt-2 hover-anim">Login</button>
+                    <p class="text-center mt-3" style="font-size:0.9rem;">Belum punya akun? <a href="#" id="link-to-register">Daftar</a></p>
+                </form>
+            </div>
+
+            <div id="customer-register-box" style="display:none;">
+                <h3>Daftar Akun Baru</h3>
+                <form id="customer-register-form" class="mt-3">
+                    <div class="form-group mb-2"><label>Nama Lengkap</label><input type="text" id="cust-reg-name" class="form-control" required></div>
+                    <div class="form-group mb-2"><label>Email</label><input type="email" id="cust-reg-email" class="form-control" required></div>
+                    <div class="form-group mb-2"><label>No HP</label><input type="text" id="cust-reg-phone" class="form-control" required></div>
+                    <div class="form-group mb-2"><label>Username</label><input type="text" id="cust-reg-username" class="form-control" required></div>
+                    <div class="form-group mb-2"><label>Password</label><input type="password" id="cust-reg-password" class="form-control" required></div>
+                    <button type="submit" class="btn-primary w-100 mt-2 hover-anim">Daftar</button>
+                    <p class="text-center mt-3" style="font-size:0.9rem;">Sudah punya akun? <a href="#" id="link-to-login">Login</a></p>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Modal Form (Public Shopping Cart) -->
+    <div id="public-cart-modal" class="modal">
+        <div class="modal-content glassmorphism" style="max-width: 500px; padding: 1.5rem;">
+            <span class="close" data-modal="public-cart-modal">&times;</span>
+            <h3>Keranjang Belanja</h3>
+            <div id="public-cart-items" class="cart-items mt-3">
+                <p class="empty-cart">Keranjang masih kosong</p>
+            </div>
+            <div class="cart-summary mt-3">
+                <div class="form-group mb-2">
+                    <label>Metode Pembayaran:</label>
+                    <select id="public-payment-method" class="form-control">
+                        <option value="transfer">Transfer Bank</option>
+                        <option value="credit">Kartu Kredit</option>
+                        <option value="cash">COD (Cash on Delivery)</option>
+                    </select>
+                </div>
+                <div class="total-bar">
+                    <span>Total Pembayaran:</span>
+                    <strong id="public-cart-total">Rp 0</strong>
+                </div>
+                <button id="btn-public-checkout" class="btn-primary w-100 mt-2 hover-anim">Selesaikan Pesanan</button>
+            </div>
         </div>
     </div>
 

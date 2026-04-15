@@ -25,6 +25,8 @@ CREATE TABLE IF NOT EXISTS products (
 -- 3. Customers Table (CRM)
 CREATE TABLE IF NOT EXISTS customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(255),
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100),
     phone VARCHAR(20),
@@ -36,12 +38,12 @@ CREATE TABLE IF NOT EXISTS customers (
 -- 4. Transactions Table (POS)
 CREATE TABLE IF NOT EXISTS transactions (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT,
     customer_id INT NOT NULL,
     total_amount DECIMAL(15,2) NOT NULL,
     payment_method ENUM('cash', 'transfer', 'credit') DEFAULT 'cash',
     transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
     FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
 );
 
@@ -77,10 +79,10 @@ INSERT INTO products (name, description, price, stock) VALUES
 ('DJI Mini 4 Pro', 'Drone dengan Remote RC 2, Video 4K HDR', 14500000.00, 12);
 
 -- Insert Corporate & Individual Customers
-INSERT INTO customers (name, email, phone, address, status) VALUES
-('PT. Maju Teknologi Nusantara', 'procurement@majutech.co.id', '021-55667788', 'Gedung Cyber, Jakarta Selatan', 'active'),
-('Dian Sastrowardoyo', 'dian.s@example.com', '081299998888', 'Residence Indah Menteng, Jakarta', 'active'),
-('Budi Komputer Service', 'budiservice@example.com', '081344556677', 'Jl. Braga No 15, Bandung', 'lead');
+INSERT INTO customers (username, password, name, email, phone, address, status) VALUES
+(NULL, NULL, 'PT. Maju Teknologi Nusantara', 'procurement@majutech.co.id', '021-55667788', 'Gedung Cyber, Jakarta Selatan', 'active'),
+(NULL, NULL, 'Dian Sastrowardoyo', 'dian.s@example.com', '081299998888', 'Residence Indah Menteng, Jakarta', 'active'),
+('budi_cust', '123456', 'Budi Komputer Service', 'budiservice@example.com', '081344556677', 'Jl. Braga No 15, Bandung', 'lead');
 
 -- Insert Initial Transactions
 -- Transaksi 1: 3x MacBook Pro (PT. Maju Teknologi) -> 94,500,000
