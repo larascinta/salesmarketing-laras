@@ -34,3 +34,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Login Credentials
+
+Here are the default login credentials to access different roles within the application:
+
+### 1. Admin
+- **Username:** `admin_ayas`
+- **Password:** `123456`
+
+### 2. Sales / User
+- **Username:** `sales_agus`
+- **Password:** `123456`
+
+### 3. Customer
+- **Username:** `maju_tech`, `dian_s`, or `budi_cust`
+- **Password:** `123456`
